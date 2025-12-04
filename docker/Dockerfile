@@ -1,5 +1,5 @@
-# Stage 1. builder
-FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
+FROM python:3.13-slim AS builder
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /docker_project
 
@@ -9,9 +9,8 @@ RUN uv sync --locked
 
 COPY ./src/ .
 
-# Stage 2. runtime
-# FROM python:3.13-slim as runtime
+ENV PATH="/docker_project/.venv/bin:$PATH"
 
-# WORKDIR /docker_project
+WORKDIR /docker_project/backend
 
-# COPY --from=builder /usr/local/bin/python3.13/site-packages /usr/local/bin/python3.13/site-packages
+CMD ["uv","run", "uvicorn", "--host=0.0.0.0", "--port=8000", "infrastructure.entrypoints.rest_api:fastapi_app"]
