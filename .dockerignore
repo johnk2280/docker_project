@@ -1,0 +1,43 @@
+# Ignore common version control and environment files/directories
+.git
+.gitignore
+.hg
+.svn
+
+**/.git
+**/.gitignore
+**/.hg
+**/.svn
+
+# Ignore local development environment files
+**/.vscode
+**/.idea
+**/.env
+**/.DS_Store
+
+
+# Ignore OS-specific files
+**/.DS_Store
+**/Thumbs.db
+
+# Ignore build output and dependency directories
+**/node_modules
+**/build
+**/dist
+**/coverage
+**/venv
+**/.venv
+
+# Ignore temporary or log files
+*.log
+**/logs/
+**/temp/
+
+# Exclude the Dockerfile and related files themselves, if they are in the build context root
+**/Dockerfile
+**/docker-compose.yml
+**/README.md
+**/Makefile
+
+**/__pycache__/
+
