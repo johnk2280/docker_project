@@ -23,4 +23,4 @@ WORKDIR /docker_project/backend
 # CMD ["uv","run", "uvicorn", "--host=0.0.0.0", "--port=8000", "infrastructure.entrypoints.rest_api:fastapi_app"]
 
 # when install dependencies to system environment
-CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "infrastructure.entrypoints.rest_api:fastapi_app"]
+CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "infrastructure.entrypoints.rest_api:fastapi_app", "--reload"]
