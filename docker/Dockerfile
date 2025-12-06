@@ -5,12 +5,22 @@ WORKDIR /docker_project
 
 COPY ./src/pyproject.toml ./src/uv.lock ./
 
-RUN uv sync --locked
+# ---
+# install dependencies to .venv into docker container
+# RUN uv sync --locked
+
+# install dependencies to system environment into docker container
+RUN uv pip install --system --no-cache-dir -r pyproject.toml  
 
 COPY ./src/ .
 
-ENV PATH="/docker_project/.venv/bin:$PATH"
+# when install dependencies to .venv
+# ENV PATH="/docker_project/.venv/bin:$PATH"
 
 WORKDIR /docker_project/backend
 
-CMD ["uv","run", "uvicorn", "--host=0.0.0.0", "--port=8000", "infrastructure.entrypoints.rest_api:fastapi_app"]
+# when install dependencies to .venv
+# CMD ["uv","run", "uvicorn", "--host=0.0.0.0", "--port=8000", "infrastructure.entrypoints.rest_api:fastapi_app"]
+
+# when install dependencies to system environment
+CMD ["uvicorn", "--host=0.0.0.0", "--port=8000", "infrastructure.entrypoints.rest_api:fastapi_app"]
