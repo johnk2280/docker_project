@@ -5,6 +5,8 @@ WORKDIR /docker_project
 
 COPY ./src/pyproject.toml ./src/uv.lock ./
 
+RUN groupadd -r app_group && useradd -r -g app_group app_user
+
 # ---
 # install dependencies to .venv into docker container
 # RUN uv sync --locked
@@ -13,6 +15,10 @@ COPY ./src/pyproject.toml ./src/uv.lock ./
 RUN uv pip install --system --no-cache-dir -r pyproject.toml  
 
 COPY ./src/ .
+
+EXPOSE 8000
+
+USER app_user
 
 # when install dependencies to .venv
 # ENV PATH="/docker_project/.venv/bin:$PATH"
