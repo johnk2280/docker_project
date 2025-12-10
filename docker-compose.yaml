@@ -1,0 +1,9 @@
+services:
+  docker_project:
+    build: ./docker
+    ports:
+      - "8000:8000"
+    environment:
+      ENVIRONMENT: dev
+    volumes:
+      - ./src:/docker_project
