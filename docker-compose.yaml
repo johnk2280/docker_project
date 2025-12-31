@@ -1,6 +1,8 @@
 services:
   docker_project:
-    build: ./docker
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
     ports:
       - "8000:8000"
     environment:
